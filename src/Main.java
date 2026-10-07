@@ -10,28 +10,49 @@ public class Main {
         int choix = scanner.nextInt();
 
         switch (choix) {
-            case 1: regle(); break;
-            case 2: nombrePremier(); break;
-            case 3: initialisationTableau(); break;
-           // case 12: testsChaines(); break;
-            default: System.out.println("Choix invalide");
+            case 1:
+                regle();
+                break;
+            case 2:
+                nombrePremier();
+                break;
+            case 3:
+                initialisationTableau();
+                break;
+            case 4 :
+                System.out.print(cherche1('a', "balthazar"));
+                break;
+            case 5:
+                System.out.print(cherche2('z', "balthazar"));
+                break;
+            case 6:
+                System.out.print(hamming("ballon" , "volant"));
+                break;
+            case 7:
+                System.out.println(suppression('a', "Motorola"));
+                break;
+            case 8:
+                System.out.println(scrabble("bataille", "abczoivonzrbzcqvze"));
+                break;
+            default:
+                System.out.println("Choix invalide");
         }
     }
 
     //-------------------3.1.1 Règle graduée----------------
 
-    public static void regle(){
+    public static void regle() {
         Scanner sc = new Scanner(System.in);
         int longeur = 0;
-        while(longeur <= 0){
+        while (longeur <= 0) {
             System.out.println("Longeur ? (Valeur strictement positif)");
             longeur = sc.nextInt();
         }
 
-        for (int i = 0 ; i <= longeur ; i++){
-            if(i % 10 == 0 ){
+        for (int i = 0; i <= longeur; i++) {
+            if (i % 10 == 0) {
                 System.out.print('|');
-            }else {
+            } else {
                 System.out.print('-');
             }
         }
@@ -39,16 +60,16 @@ public class Main {
 
     //----------------3.1.2 Nombres premiers------------------
 
-    public static void nombrePremier(){
+    public static void nombrePremier() {
         Scanner sc = new Scanner(System.in);
         int n = 0;
-        while (n <= 0){
+        while (n <= 0) {
             System.out.println("Entrez un entier strictement positif");
             n = sc.nextInt();
         }
         boolean premier = n > 1;
-        for(int i = 2 ; i * i <= n && premier; i++ ){
-            if(n % i == 0) premier = false;
+        for (int i = 2; i * i <= n && premier; i++) {
+            if (n % i == 0) premier = false;
         }
         System.out.println(n + (premier ? " est premier !" : " n'est pas premier !"));
     }
@@ -59,15 +80,17 @@ public class Main {
         int[] tableau = new int[5];
         Scanner scanner = new Scanner(System.in);
         for (int i = 0; i < tableau.length; i++) {
-            System.out.println("Saisir un entier"); int
-                    entier = scanner.nextInt(); tableau[i] =
+            System.out.println("Saisir un entier");
+            int
+                    entier = scanner.nextInt();
+            tableau[i] =
                     entier;
         }
 
         //-------- 1. Min et max + 2. Somme-----------------
-        int min = tableau[0] , max = tableau[0] ,somme = 0;
-        for (int v : tableau){
-            if (v < min) min = v ;
+        int min = tableau[0], max = tableau[0], somme = 0;
+        for (int v : tableau) {
+            if (v < min) min = v;
             if (v > max) max = v;
             somme += v;
         }
@@ -77,14 +100,14 @@ public class Main {
 
         //---------3.élements pairs------------------------
         System.out.print("les élements pairs sont :");
-        for (int v : tableau){
+        for (int v : tableau) {
             if (v % 2 == 0) System.out.print(" " + v);
         }
         System.out.println(" ");
 
         //-------4. élements d'indice pairs-----------
         System.out.print("Éléments d'indice pair :");
-        for (int i = 0 ; i < tableau.length ; i+= 2){
+        for (int i = 0; i < tableau.length; i += 2) {
             System.out.print(" " + tableau[i]);
         }
 
@@ -105,4 +128,57 @@ public class Main {
         }
     }
 
+    //--------------------------------3.4 Chaîne de caractère-----------------------------
+    //-----------------3.4.1.Rechercher un caractère ------------------
+
+     // retourne true or false
+    public  static boolean cherche1(char n, String c) {
+        for (int i = 0; i < c.length(); i++) {
+            if (c.charAt(i) == n) {
+                return true;
+            }
+        }
+        return false;
     }
+
+    //  "première occurrence" (-1 si absent)
+    public  static int cherche2(char n, String c) {
+        for (int i = 0; i < c.length(); i++) {
+            if (c.charAt(i) == n) return i;
+        }
+        return -1;
+    }
+
+    //---------------------3.4.2 Distance de Hamming-------------------
+    public static int hamming(String a, String b){
+        if (a.length() != b.length()) return -1;
+        int distance = 0;
+        for (int i = 0; i < a.length() ; i++){
+            if(a.charAt(i) != b.charAt(i)) distance ++  ;
+        }
+        return distance;
+    }
+
+    //---------------------3.4.3 Suppression d’une chaîne de caractères-------------------
+
+    public static String suppression( char c , String s) {
+        for (int i = 0; i < s.length() ; i++){
+            if (s.charAt(i) == c) {
+                return s.substring(0,i) + s.substring(i+1);
+            }
+        }
+        return s;
+    }
+
+    public static boolean scrabble (String mot , String lettresDisponibles){
+        for (int i = 0 ; i < mot.length(); i++){
+            char lettre = mot.charAt(i);
+
+            if (lettresDisponibles.indexOf(lettre) == -1){
+                return false;
+            }
+            lettresDisponibles = suppression(lettre , lettresDisponibles) ;
+        }
+        return true;
+    }
+}
