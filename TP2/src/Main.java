@@ -37,6 +37,9 @@ public class Main {
             case 9:
                 System.out.println(anagrammes("parisien", "aspirine"));
                 break;
+            case 10:
+                System.out.println(somme("13+8+"));
+                break;
             default:
                 System.out.println("Choix invalide");
         }
@@ -199,5 +202,36 @@ public class Main {
             v = suppression(lettre, v);
         }
         return true;
+    }
+
+    public static int somme(String expression) {
+        if (expression.length() == 0) {
+            return -1;
+        }
+
+        int resultat = 0;
+        int nombre = 0;
+
+        for (int i = 0; i < expression.length(); i++) {
+            char caractere = expression.charAt(i);
+
+            if (caractere >= '0' && caractere <= '9') {
+                nombre = nombre * 10 + (caractere - '0');
+            } else if (caractere == '+') {
+                if (i == 0 || expression.charAt(i - 1) == '+') {
+                    return -1;
+                }
+                resultat += nombre;
+                nombre = 0;
+            } else {
+                return -1;
+            }
+        }
+
+        if (expression.charAt(expression.length() - 1) == '+') {
+            return -1;
+        }
+
+        return resultat + nombre;
     }
 }
