@@ -134,7 +134,7 @@ public class Main {
     //--------------------------------3.4 Chaîne de caractère-----------------------------
     //-----------------3.4.1.Rechercher un caractère ------------------
 
-     // retourne true or false
+    // retourne true or false
     public  static boolean cherche1(char n, String c) {
         for (int i = 0; i < c.length(); i++) {
             if (c.charAt(i) == n) {
@@ -190,14 +190,14 @@ public class Main {
         if (u.length() != v.length()){
             return false;
         }
-         for (int i = 0; i < u.length() ; i++){
-             char lettre = u.charAt(i);
+        for (int i = 0; i < u.length() ; i++){
+            char lettre = u.charAt(i);
 
-             if (v.indexOf(lettre) == -1){
-                 return false;
-             }
-             v = suppression(lettre, v);
-         }
-         return true;
+            if (v.indexOf(lettre) == -1){
+                return false;
+            }
+            v = suppression(lettre, v);
+        }
+        return true;
     }
 }
