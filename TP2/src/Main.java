@@ -34,6 +34,9 @@ public class Main {
             case 8:
                 System.out.println(scrabble("bataille", "abczoivonzrbzcqvze"));
                 break;
+            case 9:
+                System.out.println(anagrammes("parisien", "aspirine"));
+                break;
             default:
                 System.out.println("Choix invalide");
         }
@@ -180,5 +183,21 @@ public class Main {
             lettresDisponibles = suppression(lettre , lettresDisponibles) ;
         }
         return true;
+    }
+
+
+    public static boolean anagrammes(String u, String v) {
+        if (u.length() != v.length()){
+            return false;
+        }
+         for (int i = 0; i < u.length() ; i++){
+             char lettre = u.charAt(i);
+
+             if (v.indexOf(lettre) == -1){
+                 return false;
+             }
+             v = suppression(lettre, v);
+         }
+         return true;
     }
 }
